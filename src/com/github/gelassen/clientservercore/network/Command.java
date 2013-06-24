@@ -74,10 +74,12 @@ public abstract class Command implements Parcelable{
             }
         } catch (IOException e) {
             Log.d(Info.TAG, "Failed to execute command", e);
+            updateCommandStatus(false, -1, null);
         } finally {
             Log.d(Info.TAG, String.format("%s is ended, %s", 
                     this.getClass().getSimpleName(),
                         System.currentTimeMillis() - stime));
+            notifyListeners();
         }
 
     }
